@@ -10,7 +10,6 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -23,9 +22,10 @@ static JSlider getSlider(final JOptionPane optionPane) {
 	    slider.setPaintTicks(true);
 	    slider.setPaintLabels(true);
 	    ChangeListener changeListener = new ChangeListener() {
-	      public void stateChanged(ChangeEvent changeEvent) {
-	        JSlider theSlider = (JSlider) changeEvent.getSource();
-	        if (!theSlider.getValueIsAdjusting()) {
+	    	
+public void stateChanged(ChangeEvent changeEvent) {
+	  JSlider theSlider = (JSlider) changeEvent.getSource();
+	       if (!theSlider.getValueIsAdjusting()) {
 	          optionPane.setInputValue(new Integer(theSlider.getValue()));
 	        }
 	      }
@@ -41,7 +41,7 @@ static JSlider getSlider(final JOptionPane optionPane) {
 		//picas apraksts
 		String[] piegades = {"Piegāde","Vietēji"};
 		String[] tipi = {"Hawaii","Studenta","Pepperoni"};
-		String[] piedeva = {"Bekons","tests 2","tests3"};
+		String[] piedeva = {"Bekons","Siers","Sēnes"};
 		String[] merces = {"BBQ","Ketchups","placeholder"};
 		
 		ArrayList<Object> Pica = new ArrayList<>();
@@ -92,11 +92,38 @@ static JSlider getSlider(final JOptionPane optionPane) {
 			    optionPane.setOptionType(JOptionPane.OK_CANCEL_OPTION);
 			    JDialog dialog = optionPane.createDialog(parent, "Izvēle");
 			    dialog.setVisible(true);
-			    lielums = (int)(optionPane.getInputValue());
 			    
+			    lielums = (int)optionPane.getValue();
 			    //cenas aprekins
 			    //ja piegade = true tad +1,27 
-			   
+//			    if(piegade == true){
+//			    	cena = cena+1.27;
+//			    }
+			    
+			    if(tips=="Hawaii" || tips == "Studenta"){
+			    	cena = cena+4.25;
+			    }else{
+			    	cena = cena+5;
+			    }
+			    
+			    if(piedevas == "Bekons" || piedevas == "Sēnes"){
+			    	cena = cena+1.25;
+			    }else{
+			    	cena = cena+1;
+			    }
+			    
+			    if(merce == "BBQ" || merce == "Ketchups"){
+			    	cena = cena+0.45;
+			    }else{
+			    	cena = cena+0.99;
+			    }
+			    
+			    if(lielums >= 14){
+			    	cena = cena+6;
+			    }else if(lielums <= 14){
+			    	cena = cena+4;
+			    }
+			    
 			    //String tips, String merce, int cena, int izmers,boolean piegade, int skaits, String piedevas
 			    Pica.add(new Pica(tips,merce,cena,lielums,piegade,skaits,piedevas));
 			    pagaida++;
