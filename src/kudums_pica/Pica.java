@@ -24,4 +24,36 @@ public class Pica {
 	
 	//Metodes
 	
+	public String getTips(){
+		return tips;
+	}
+	
+	public String getMerce(){
+		return merce;
+	}
+	public String getPiedevas(){
+		return piedevas;
+	}
+
+	public double getCena(){
+		return cena;
+	}
+	
+	public int getIzmers(){
+		return izmers;
+	}
+	
+	public boolean getPiegade(){
+		return piegade;
+	}
+	
+	public String checks(){
+		return "Picas tips: "+getTips()
+		+"\nPicas merce: "+getMerce()
+		+"\nPicas piedevas: "+getPiedevas()
+		+"\nPicas izmērs: "+getIzmers()
+		+"\nVai ir piegāde?"+(getPiegade() ? "Ir" : "Nav");
+	}
+	
+	
 }

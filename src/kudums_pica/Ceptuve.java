@@ -15,16 +15,18 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class Ceptuve {
-static JSlider getSlider(final JOptionPane optionPane) {
-	    JSlider slider = new JSlider(7,24);
+
+	static JSlider getSlider(final JOptionPane optionPane) {
+	    JSlider slider = new JSlider(7,25);
 	    slider.setMinorTickSpacing(2);  
 	    slider.setMajorTickSpacing(4);
 	    slider.setPaintTicks(true);
 	    slider.setPaintLabels(true);
 	    ChangeListener changeListener = new ChangeListener() {
 	    	
-public void stateChanged(ChangeEvent changeEvent) {
-	  JSlider theSlider = (JSlider) changeEvent.getSource();
+
+	    	public void stateChanged(ChangeEvent changeEvent) {
+	    			JSlider theSlider = (JSlider) changeEvent.getSource();
 	       if (!theSlider.getValueIsAdjusting()) {
 	          optionPane.setInputValue(new Integer(theSlider.getValue()));
 	        }
@@ -87,13 +89,14 @@ public void stateChanged(ChangeEvent changeEvent) {
 				JFrame parent = new JFrame();
 			    JOptionPane optionPane = new JOptionPane();
 			    JSlider slider = getSlider(optionPane);
+			    
 			    optionPane.setMessage(new Object[] { "Izvēlaties lielumu: ", slider });
 			    optionPane.setMessageType(JOptionPane.QUESTION_MESSAGE);
 			    optionPane.setOptionType(JOptionPane.OK_CANCEL_OPTION);
 			    JDialog dialog = optionPane.createDialog(parent, "Izvēle");
 			    dialog.setVisible(true);
 			    
-			    lielums = (int)optionPane.getValue();
+			   
 			    //cenas aprekins
 			    //ja piegade = true tad +1,27 
 //			    if(piegade == true){
@@ -131,7 +134,18 @@ public void stateChanged(ChangeEvent changeEvent) {
 				break;
 			
 			case 1:	//apskatīties pasūtījumus
-				
+				String str;
+				if(Pica.size()>0){
+					str = "Picu pasūtijumi: "+Pica.size()+"\n______________________\n";
+					
+					for(int i=0; i<Pica.size(); i++){
+						str+= ((Pica)Pica.get(i)).checks()+"\n______________\n";
+					}
+					
+					JOptionPane.showMessageDialog(null,str,"Picu saraksts",JOptionPane.INFORMATION_MESSAGE);
+				}else{
+					JOptionPane.showMessageDialog(null, "Nav nekādu pasūtijumu!","Informācija",JOptionPane.INFORMATION_MESSAGE);
+				}
 				break;
 				
 			case 2:	//izcept picu
