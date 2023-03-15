@@ -52,7 +52,7 @@ public class Pica {
 		+"\nPicas merce: "+getMerce()
 		+"\nPicas piedevas: "+getPiedevas()
 		+"\nPicas izmērs: "+getIzmers()
-		+"\nVai ir piegāde?"+(getPiegade() ? "Ir" : "Nav");
+		+"\nPiegāde: "+(getPiegade() ? "Ir" : "Nav");
 	}
 	
 	

@@ -35,7 +35,6 @@ public class Ceptuve {
 	    slider.addChangeListener(changeListener);
 	    return slider;
 	  }
-
 	public static void main(String[] args) {
 		int izvele;
 		
@@ -95,8 +94,8 @@ public class Ceptuve {
 			    optionPane.setOptionType(JOptionPane.OK_CANCEL_OPTION);
 			    JDialog dialog = optionPane.createDialog(parent, "Izvēle");
 			    dialog.setVisible(true);
+			    lielums = slider.getValue();
 			    
-			   
 			    //cenas aprekins
 			    //ja piegade = true tad +1,27 
 //			    if(piegade == true){
