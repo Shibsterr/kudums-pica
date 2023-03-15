@@ -1,5 +1,10 @@
 package kudums_pica;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
+import javax.swing.JOptionPane;
+
 public class Pica {
 
 	//Attribūti
@@ -52,8 +57,8 @@ public class Pica {
 		+"\nPicas merce: "+getMerce()
 		+"\nPicas piedevas: "+getPiedevas()
 		+"\nPicas izmērs: "+getIzmers()
-		+"\nPiegāde: "+(getPiegade() ? "Ir" : "Nav");
+		+"\nPicas cena: "+getCena()
+		+"\nPica ir saņemta no vietas";
 	}
-	
 	
 }
