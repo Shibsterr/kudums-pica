@@ -229,7 +229,7 @@ public class Ceptuve {
 				}
 				break;
 				
-			case 2:	//izcept picu
+			case 2:	//izcept picu vai arī izdzēst to picu
 				if(Pica.size()>0){
 					izvelesIndekss = picasIzvele(Pica);
 					Pica.remove(izvelesIndekss);
@@ -247,7 +247,7 @@ public class Ceptuve {
 				}
 				break;
 				
-			case 4:
+			case 4:	//izmests vai izstīrit ceka failu
 				izmestsCekus();
 				break;
 			
