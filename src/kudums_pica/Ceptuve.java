@@ -18,11 +18,13 @@ import javax.swing.event.ChangeListener;
 public class Ceptuve {
 
 	static JSlider getSlider(final JOptionPane optionPane) {
-	    JSlider slider = new JSlider(7,25);
-	    slider.setMinorTickSpacing(2);  
-	    slider.setMajorTickSpacing(4);
+	    JSlider slider = new JSlider(7,24);
+	    slider.setMinorTickSpacing(7);  
+	    slider.setMajorTickSpacing(7);
 	    slider.setPaintTicks(true);
 	    slider.setPaintLabels(true);
+	    slider.setValue(14);
+	    slider.setSnapToTicks(true);
 	    ChangeListener changeListener = new ChangeListener() {
 	    	
 
