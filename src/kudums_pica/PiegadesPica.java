@@ -28,14 +28,13 @@ public class PiegadesPica extends Pica {
 	public String checkaIerakste(){
 		return 
 	"\n-------------------------\n"
-	+"Picas tips: "+getTips()
-	+"\nPicas merces: "+getMerce()
-	+"\nPicas piedevas: "+getPiedevas()
-	+"\nPicas izmērs: "+getIzmers()
-	+"\nPica ir pasūtīta uz: "+getAdrese()
-	+"\nPicas cena ar PVN(14%): "+(getCena()+(14/100))
-	+"\nCena bez PVN(14%): "+getCena()
-	+"\n\t PALDIES PAR IEPIRKŪJUMU\t\n"
+	+"| Picas tips: "+getTips()
+	+"\n| Picas merces: "+getMerce()
+	+"\n| Picas piedevas: "+getPiedevas()
+	+"\n| Picas izmērs: "+getIzmers()
+	+"\n| Pica ir pasūtīta uz: "+getAdrese()
+	+"\n| Pasūtijuma cena: "+getCena()
+	+"\n\t PALDIES PAR IEPIRKUMU\t\n"
 	+"-----------------------------\n";
 	}
 	

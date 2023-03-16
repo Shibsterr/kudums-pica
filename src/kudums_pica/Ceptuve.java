@@ -83,10 +83,25 @@ public class Ceptuve {
 		}
 	}
 	
+	static void izmestsCekus(){
+    try{
+		 FileWriter fw = new FileWriter("ceks.txt", false);
+		 PrintWriter pw = new PrintWriter(fw, false);
+
+			    pw.flush();
+			    pw.close();
+			    fw.close();
+			    JOptionPane.showMessageDialog(null, "Čeki ir izmesti!","Brīdinājums",JOptionPane.WARNING_MESSAGE);
+			    }catch(Exception exception){
+			    	JOptionPane.showMessageDialog(null, "Kļūda ar čeka izmešanu!");
+
+			    }
+	}
+	
 	public static void main(String[] args) {
 		int izvele;
 		
-		String[] darbibas = {"Pasūtīt picu","Apskatīties pasūtījumus","Izcept picu","Apskatīt ceku","Beigt darbu"};
+		String[] darbibas = {"Pasūtīt picu","Apskatīties pasūtījumus","Izcept picu","Apskatīt ceku","Izmest čekus","Beigt darbu"};
 		//picas apraksts
 		String[] piegades = {"Piegāde","Vietēji"};
 		String[] tipi = {"Hawaii","Studenta","Pepperoni"};
@@ -232,12 +247,16 @@ public class Ceptuve {
 				}
 				break;
 				
-			case 4:	//beight darbu
+			case 4:
+				izmestsCekus();
+				break;
+			
+			case 5:	//beight darbu
 				JOptionPane.showMessageDialog(null, "Darbs beights šodien!","Informācija",JOptionPane.INFORMATION_MESSAGE);
 				break;
 			}
 			
-		}while(izvele != 4);
+		}while(izvele != 5);
 		
 	}
 
