@@ -55,6 +55,34 @@ public class Ceptuve {
 		}
 	}
 	
+	static int picasIzvele(ArrayList<Object> Pica){
+		String[] rSaraksts = new String[Pica.size()];
+		
+		for(int i=0; i<rSaraksts.length; i++){
+			rSaraksts[i] = ((Pica)Pica.get(i)).getTips()+"\n"+
+		((((Pica)Pica.get(i)).getPiegade() ? " Piegadāts uz adresi "+((PiegadesPica)Pica.get(i)).getAdrese()+" " : " Klients pasūtija vietēji"))+" "+(((Pica)Pica.get(i)).getCena())+" EUR";
+		}
+		String izveletais =
+				(String)JOptionPane.showInputDialog(null,"Kuru pasūtijumu izpildīt? ","Izpilde",JOptionPane.QUESTION_MESSAGE,
+				null,rSaraksts,rSaraksts[0]);
+		
+		return Arrays.asList(rSaraksts).indexOf(izveletais);
+	}
+	
+	static void ierasktitCheku(String teksts){
+		try{
+			FileWriter fw = new FileWriter("ceks.txt");
+			PrintWriter pw = new PrintWriter(fw);
+			
+			pw.print(teksts);
+			pw.println();
+			pw.close();
+			JOptionPane.showMessageDialog(null, "Jūsu pica ir pasūtīta!","Pasūtījums",JOptionPane.INFORMATION_MESSAGE);
+		}catch(Exception E){
+			JOptionPane.showMessageDialog(null, "Kļūda rakstot cheku!");
+		}
+	}
+	
 	public static void main(String[] args) {
 		int izvele;
 		
@@ -105,7 +133,7 @@ public class Ceptuve {
 			    		JOptionPane.QUESTION_MESSAGE,null,piedeva,piedeva[0]);
 			    //"BBQ","Ketchups","Majonēze"
 			    merce = (String)JOptionPane.showInputDialog(null,"Kādu mērci jūs vēlaties pielikt?\n__________________\n"
-			    		+ "BBQ - 0,45 EUR \n Ketchups - 0,45 EUR \n Majonēze - 0,99 EUR \n__________________\n","Izvēle",
+			    		+ "BBQ - 0,45 EUR \n Ketchups - 0,45 EUR \n Majonēze - 0,35 EUR \n__________________\n","Izvēle",
 			    		JOptionPane.QUESTION_MESSAGE,null,merces,merces[0]);
 			    
 				//sliders izvele preks picas lieluma
@@ -122,10 +150,10 @@ public class Ceptuve {
 			    lielums = slider.getValue();
 			    
 			    //cenas aprekins
-			    //ja piegade = true tad +1,27 
+			    //ja piegade = true tad +1,25 
 			    
 			    if(piegade == true){
-			    	cena = cena+1.27;
+			    	cena = cena+1.25;
 			    }
 			    
 			    if(tips=="Hawaii" || tips == "Studenta"){
@@ -143,12 +171,12 @@ public class Ceptuve {
 			    if(merce == "BBQ" || merce == "Ketchups"){
 			    	cena = cena+0.45;
 			    }else{
-			    	cena = cena+0.99;
+			    	cena = cena+0.35;
 			    }
 			    
 			    if(lielums > 14){
 			    	cena = cena+6;
-			    }else if(lielums < 14){
+			    }else if(lielums <= 14){
 			    	cena = cena+4;
 			    }
 			    DecimalFormat df = new DecimalFormat(".##");
@@ -163,6 +191,12 @@ public class Ceptuve {
 			    }
 			    pagaida++;
 				}while(pagaida != skaits);
+				String str1="";
+				for(int i=0; i<Pica.size(); i++){
+					str1 += ((Pica)Pica.get(i)).checkaIerakste();
+				}
+				ierasktitCheku(str1);
+				
 				break;
 			
 			case 1:	//apskatīties pasūtījumus
@@ -173,7 +207,7 @@ public class Ceptuve {
 					for(int i=0; i<Pica.size(); i++){
 						str+= ((Pica)Pica.get(i)).checks()+"\n______________\n";
 					}
-					
+
 					JOptionPane.showMessageDialog(null,str,"Picu saraksts",JOptionPane.INFORMATION_MESSAGE);
 				}else{
 					JOptionPane.showMessageDialog(null, "Nav nekādu pasūtijumu!","Informācija",JOptionPane.INFORMATION_MESSAGE);
@@ -182,7 +216,9 @@ public class Ceptuve {
 				
 			case 2:	//izcept picu
 				if(Pica.size()>0){
-					
+					izvelesIndekss = picasIzvele(Pica);
+					Pica.remove(izvelesIndekss);
+					JOptionPane.showMessageDialog(null,"Pica veiksmīgi ir izcepta un atdota klientam!");
 				}else{
 					JOptionPane.showMessageDialog(null, "Nav nekādu pasūtijumu!","Informācija",JOptionPane.INFORMATION_MESSAGE);
 				}
@@ -201,7 +237,7 @@ public class Ceptuve {
 				break;
 			}
 			
-		}while(izvele != 3);
+		}while(izvele != 4);
 		
 	}
 
