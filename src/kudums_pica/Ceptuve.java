@@ -19,15 +19,14 @@ public class Ceptuve {
 
 	static JSlider getSlider(final JOptionPane optionPane) {
 	    JSlider slider = new JSlider(7,24);
-	    slider.setMinorTickSpacing(7);  
-	    slider.setMajorTickSpacing(7);
+	    slider.setMinorTickSpacing(6);  
+	    slider.setMajorTickSpacing(4);
 	    slider.setPaintTicks(true);
 	    slider.setPaintLabels(true);
-	    slider.setValue(14);
+	    slider.setValue(7);
 	    slider.setSnapToTicks(true);
 	    ChangeListener changeListener = new ChangeListener() {
 	    	
-
 	    	public void stateChanged(ChangeEvent changeEvent) {
 	    			JSlider theSlider = (JSlider) changeEvent.getSource();
 	       if (!theSlider.getValueIsAdjusting()) {
