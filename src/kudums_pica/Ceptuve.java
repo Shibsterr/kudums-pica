@@ -1,5 +1,11 @@
 package kudums_pica;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.LayoutManager;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,9 +14,11 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -85,7 +93,8 @@ public class Ceptuve {
 	}
 	
 	static void izmestsCekus(){
-    try{
+
+		try{
 		 FileWriter fw = new FileWriter("ceks.txt", false);
 		 PrintWriter pw = new PrintWriter(fw, false);
 
@@ -98,7 +107,7 @@ public class Ceptuve {
 
 			    }
 	}
-	
+
 	public static void main(String[] args) {
 		int izvele;
 		
@@ -108,7 +117,7 @@ public class Ceptuve {
 		String[] tipi = {"Hawaii","Studenta","Pepperoni"};
 		String[] piedeva = {"Bekons","Siers","Sēnes"};
 		String[] merces = {"BBQ","Ketchups","Majonēze"};
-		
+		String[] PiedevaIzvele = new String[4];
     
 		ArrayList<Object> Pica = new ArrayList<>();
 		
@@ -119,7 +128,7 @@ public class Ceptuve {
 			switch(izvele){
 			
 			case 0:	//pasūtit picu
-				String tips,merce,adrese,pag,piedevas;
+				String tips,merce,adrese,pag;
 				int lielums,skaits,pagaida=0;
 				double cena=0;
 				boolean piegade = false;
@@ -143,10 +152,51 @@ public class Ceptuve {
 			    tips = (String) JOptionPane.showInputDialog(null,"Kāda tipa picu jūs vēlaties?\n__________________\n "
 			    		+ "Hawaii - 4,25 EUR \n Studentu - 4,25 EUR \n Pepperoni - 5 EUR \n__________________\n","Izvēle",
 			    		JOptionPane.QUESTION_MESSAGE,null,tipi,tipi[0]);
+			    
 			    //"Bekons","Siers","Sēnes"
-			    piedevas = (String)JOptionPane.showInputDialog(null,"Kādas piedevas jūs vēlaties?\n__________________\n "
-			    		+ "Bekons - 1,25 EUR \n Siers - 1 EUR \n Sēnes - 1,25 EUR\n__________________\n","Izvēle",
-			    		JOptionPane.QUESTION_MESSAGE,null,piedeva,piedeva[0]);
+			      JPanel panel = new JPanel();
+			      JFrame parents = new JFrame();
+			      LayoutManager layout = new FlowLayout();  
+			      panel.setLayout(layout);       
+
+			      JCheckBox checkBox1 = new JCheckBox("Bekons - 1,25 EUR");
+			      JCheckBox checkBox2 = new JCheckBox("Siers - 1 EUR");
+			      JCheckBox checkBox3 = new JCheckBox("Sēnes - 1,25 EUR");
+
+
+			      panel.add(checkBox1);
+			      panel.add(checkBox2);
+			      panel.add(checkBox3);
+			      
+			      Object[] params = {checkBox1,checkBox2,checkBox3};
+			      JOptionPane optionPanes = new JOptionPane();   
+			      
+			      optionPanes.setMessage(new Object[] { "Izvēlaties lielumu: ", params });
+			      optionPanes.setMessageType(JOptionPane.QUESTION_MESSAGE);
+			      optionPanes.setOptionType(JOptionPane.OK_CANCEL_OPTION);
+			      JDialog dialogs = optionPanes.createDialog(parents, "Izvēle");
+				  dialogs.setVisible(true);
+				    
+				  if(checkBox1.isSelected() == true)
+					  PiedevaIzvele[1] = "Bekons"; 
+
+				  if(checkBox2.isSelected() == true)
+					  PiedevaIzvele[2] = "Siers"; 
+
+				  if(checkBox3.isSelected() == true)
+					  PiedevaIzvele[3] = "Sēnes"; 
+					  
+				  if(checkBox1.isSelected() == false && checkBox2.isSelected() == false && checkBox3.isSelected() == false)
+					  PiedevaIzvele[1] = null;
+				  	  PiedevaIzvele[2] = null;
+				  	  PiedevaIzvele[3] = null;
+				  
+//			    piedevas = (String)JOptionPane.showInputDialog(null,"Kādas piedevas jūs vēlaties?\n__________________\n "
+//			    		+ "Bekons - 1,25 EUR \n Siers - 1 EUR \n Sēnes - 1,25 EUR\n__________________\n","Izvēle",
+//			    		JOptionPane.QUESTION_MESSAGE,null,piedeva,piedeva[0]);
+			    
+			    
+			    
 			    //"BBQ","Ketchups","Majonēze"
 			    merce = (String)JOptionPane.showInputDialog(null,"Kādu mērci jūs vēlaties pielikt?\n__________________\n"
 			    		+ "BBQ - 0,45 EUR \n Ketchups - 0,45 EUR \n Majonēze - 0,35 EUR \n__________________\n","Izvēle",
@@ -178,9 +228,9 @@ public class Ceptuve {
 			    	cena = cena+5;
 			    }
 			    
-			    if(piedevas == "Bekons" || piedevas == "Sēnes"){
+			    if(PiedevaIzvele[1] == "Bekons" || PiedevaIzvele[3] == "Sēnes"){
 			    	cena = cena+1.25;
-			    }else{
+			    }else if(PiedevaIzvele[2] == "Sēnes"){
 			    	cena = cena+1;
 			    }
 			    
@@ -199,11 +249,11 @@ public class Ceptuve {
 			    //String tips, String merce, int cena, int izmers,boolean piegade, int skaits, String piedevas
 			    if(piegade == false){
 				    df.format(cena);
-			    Pica.add(new Pica(tips,merce,cena,lielums,piegade,skaits,piedevas));
+			    Pica.add(new Pica(tips,merce,cena,lielums,piegade,skaits,PiedevaIzvele));
 			    }else if(piegade == true){
 			    	adrese = (String)JOptionPane.showInputDialog(null,"Ievadiet savu adresi lai varēt jums piegādāt picu! ");
 			    	 df.format(cena);
-			    	 Pica.add(new PiegadesPica(tips,merce,cena,lielums,piegade,skaits,piedevas,adrese));
+			    	 Pica.add(new PiegadesPica(tips,merce,cena,lielums,piegade,skaits,PiedevaIzvele,adrese));
 			    }
 			    pagaida++;
 				}while(pagaida != skaits);
@@ -212,7 +262,6 @@ public class Ceptuve {
 					str1 += ((Pica)Pica.get(i)).checkaIerakste();
 				}
 				ierasktitCheku(str1);
-				
 				break;
 			
 			case 1:	//apskatīties pasūtījumus
