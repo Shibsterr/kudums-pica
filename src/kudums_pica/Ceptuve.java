@@ -8,8 +8,11 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -98,6 +101,7 @@ public class Ceptuve {
 
 			    }
 	}
+
 	
 	public static void main(String[] args) {
 		int izvele;
